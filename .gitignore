@@ -1,0 +1,32 @@
+# Python byte-compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# Environment configurations (API keys & secrets)
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Cache and temporary files generated during video renders
+cache/
+*.list.txt
+
+# Generated media outputs & synthesized voice files
+static/outputs/reel_*.mp4
+static/voiceovers/audio_*.mp3
+static/voiceovers/audio_*.wav
+
+# OS files
+.DS_Store
+.DS_Store?
+Thumbs.db
+Ehthumbs.db
