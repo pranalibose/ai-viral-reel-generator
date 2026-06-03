@@ -1,32 +1,27 @@
-# Python byte-compiled files
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Virtual environments
-venv/
-ENV/
-env/
-.venv/
-
-# Environment configurations (API keys & secrets)
-.env
-.env.local
-.env.development
-.env.test
-.env.production
-
-# Cache and temporary files generated during video renders
-cache/
-*.list.txt
-
-# Generated media outputs & synthesized voice files
-static/outputs/reel_*.mp4
-static/voiceovers/audio_*.mp3
-static/voiceovers/audio_*.wav
-
 # OS files
 .DS_Store
 .DS_Store?
 Thumbs.db
-Ehthumbs.db
+
+# Backend Virtual environments
+backend/venv/
+backend/ENV/
+backend/env/
+backend/.venv/
+
+# Backend Secrets
+backend/.env
+backend/.env.local
+
+# Backend Temporary Caches & Rendering Files
+backend/cache/
+backend/*.list.txt
+
+# Generated output media
+backend/static/outputs/reel_*.mp4
+backend/static/voiceovers/audio_*.mp3
+backend/static/voiceovers/audio_*.wav
+
+# Node modules (if any frontend tooling is added in the future)
+node_modules/
+dist/

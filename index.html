@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ViralReel.AI - Zero-Cost AI Reel Generator</title>
+  <!-- Google Fonts: Plus Jakarta Sans for premium modern look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background glow circles for glassmorphism layout -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-3"></div>
+
+  <div class="app-container">
+    
+    <!-- Top Header Bar -->
+    <header class="main-header">
+      <div class="logo">
+        <div class="logo-icon">
+          <i data-lucide="video" class="violet-glow"></i>
+        </div>
+        <span class="logo-text">ViralReel<span class="highlight">.AI</span></span>
+        <span class="badge">100% FREE TIER</span>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-secondary btn-sm" id="btn-quick-tour">
+          <i data-lucide="help-circle"></i> Quick Tour
+        </button>
+        <div class="divider"></div>
+        <div class="active-profile">
+          <div class="avatar">PB</div>
+          <span class="profile-name">Creator Mode</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Workspace Grid -->
+    <main class="workspace-grid">
+      
+      <!-- COLUMN 1: Inputs & Settings -->
+      <section class="workspace-column input-panel">
+        <div class="panel-header">
+          <i data-lucide="file-text"></i>
+          <h2>Input & Configuration</h2>
+        </div>
+        
+        <div class="panel-body">
+          <!-- Text Input Area -->
+          <div class="input-group">
+            <label for="raw-text">Source Script or Blog Content</label>
+            <div class="textarea-wrapper">
+              <textarea id="raw-text" placeholder="Paste your blog article, text script, or video idea here..."></textarea>
+              <div class="char-count">0 chars</div>
+            </div>
+            <div class="input-presets">
+              <button class="preset-tag" data-preset="hook">💡 Inject Catchy Hook</button>
+              <button class="preset-tag" data-preset="fin">📈 Finance Presets</button>
+              <button class="preset-tag" data-preset="tech">💻 Tech Preset</button>
+            </div>
+          </div>
+
+          <!-- Configuration Accordion / Layout -->
+          <div class="form-grid">
+            <!-- Style Template Select -->
+            <div class="input-group">
+              <label>Reel Visual Template</label>
+              <div class="style-cards-grid">
+                <div class="style-card active" data-style="tech">
+                  <div class="style-card-color tech-gradient"></div>
+                  <span>Lofi Dev</span>
+                </div>
+                <div class="style-card" data-style="bold">
+                  <div class="style-card-color bold-gradient"></div>
+                  <span>Finance Bold</span>
+                </div>
+                <div class="style-card" data-style="minimal">
+                  <div class="style-card-color minimal-gradient"></div>
+                  <span>Minimalist Tech</span>
+                </div>
+                <div class="style-card" data-style="energetic">
+                  <div class="style-card-color energetic-gradient"></div>
+                  <span>Energetic</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tone Selector -->
+            <div class="input-group">
+              <label for="tone-select">AI Generation Tone</label>
+              <select id="tone-select">
+                <option value="curious" selected>💡 Curious & Engaging</option>
+                <option value="bold">🔥 High Energy / Bold</option>
+                <option value="informative">🧠 Educational / Wise</option>
+                <option value="funny">🎭 Witty & Humorous</option>
+              </select>
+            </div>
+
+            <!-- Local Voice Synthesis Presets -->
+            <div class="input-group">
+              <label for="voice-select">Local Voice Preset (Kokoro TTS)</label>
+              <div class="select-wrapper">
+                <select id="voice-select">
+                  <option value="en_us_002" selected>🗣️ Kokoro Female (Bella - Smooth & Calm)</option>
+                  <option value="en_us_006">🗣️ Kokoro Male (Adam - Deep & Clear)</option>
+                  <option value="en_us_003">🗣️ Kokoro Female (Dolly - Energetic)</option>
+                  <option value="en_uk_001">🗣️ Kokoro Male (George - British Narrative)</option>
+                </select>
+                <button class="btn btn-icon-only btn-preview-voice" title="Test Voice">
+                  <i data-lucide="volume-2"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Target Platform / Format -->
+            <div class="input-group">
+              <label>Aspect Ratio</label>
+              <div class="toggle-group">
+                <button class="toggle-btn active" data-ratio="9-16">
+                  <i data-lucide="smartphone"></i> 9:16 Shorts
+                </button>
+                <button class="toggle-btn" data-ratio="16-9" disabled>
+                  <i data-lucide="monitor"></i> 16:9 (Pro Only)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-generate" id="btn-generate-reel">
+            <i data-lucide="sparkles"></i> Generate Storyboard & Script
+          </button>
+        </div>
+      </section>
+
+      <!-- COLUMN 2: Storyboard & Timeline Editor -->
+      <section class="workspace-column storyboard-panel">
+        <div class="panel-header">
+          <i data-lucide="trello"></i>
+          <h2>AI Storyboard Editor</h2>
+          <div class="panel-header-actions">
+            <span class="badge" id="storyboard-status">Awaiting Input</span>
+          </div>
+        </div>
+        
+        <div class="panel-body storyboard-list scroller" id="storyboard-list">
+          <!-- Empty State -->
+          <div class="empty-state" id="storyboard-empty">
+            <div class="empty-icon-wrapper">
+              <i data-lucide="wand2"></i>
+            </div>
+            <h3>No script generated yet</h3>
+            <p>Paste your content in the input panel and click "Generate Storyboard" to split your reel into visual frames and time-aligned captions.</p>
+          </div>
+          
+          <!-- Storyboard cards are dynamically inserted here -->
+        </div>
+      </section>
+
+      <!-- COLUMN 3: Live Player Preview & Export -->
+      <section class="workspace-column preview-panel">
+        <div class="panel-header">
+          <i data-lucide="eye"></i>
+          <h2>Live Player & Subtitle Preview</h2>
+        </div>
+
+        <div class="panel-body preview-body">
+          <!-- Simulated Phone Frame -->
+          <div class="phone-frame-container">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              
+              <!-- Custom Player Wrapper -->
+              <div class="video-player-wrapper">
+                
+                <!-- Mock Video Canvas/Player -->
+                <div class="mock-video-canvas" id="mock-video">
+                  <!-- Canvas background that draws gorgeous generative loop animations (CORS and offline safe fallback) -->
+                  <canvas id="player-bg-canvas" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:1; object-fit:cover; pointer-events:none;"></canvas>
+                  
+                  <!-- Video background will render standard loops based on selected template -->
+                  <video id="bg-video-element" loop muted playsinline style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:2; pointer-events:none; opacity: 0; transition: opacity 0.5s;">
+                    <source src="" type="video/mp4">
+                  </video>
+                  <div class="video-overlay-gradient" style="z-index: 3;"></div>
+                  
+                  <!-- Playback UI elements on the phone screen -->
+                  <div class="phone-screen-ui">
+                    <div class="phone-creator-info">
+                      <span class="creator-handle">@yourbrand</span>
+                      <p class="creator-desc">Create viral clips for free 🚀 #marketing #growth</p>
+                    </div>
+                    
+                    <div class="phone-interaction-column">
+                      <div class="phone-action-btn">
+                        <i data-lucide="heart"></i>
+                        <span>12.4K</span>
+                      </div>
+                      <div class="phone-action-btn">
+                        <i data-lucide="message-circle"></i>
+                        <span>890</span>
+                      </div>
+                      <div class="phone-action-btn">
+                        <i data-lucide="bookmark"></i>
+                        <span>4.2K</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Kinetic Subtitle HUD (Subtitles will be printed here) -->
+                  <div class="kinetic-captions-overlay" id="captions-overlay">
+                    <span class="kinetic-word-wrapper" id="caption-box">
+                      <!-- Subtitle text renders word-by-word with highlight active -->
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Custom Player Controls inside UI -->
+                <div class="video-custom-controls">
+                  <button class="control-btn" id="btn-play">
+                    <i data-lucide="play" id="play-icon"></i>
+                  </button>
+                  <div class="progress-container" id="timeline-progress">
+                    <div class="progress-bar" id="progress-bar-fill"></div>
+                  </div>
+                  <span class="time-display" id="time-display">00:00 / 00:00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Audio & Visualizer Track -->
+          <div class="visualizer-container">
+            <div class="visualizer-header">
+              <span class="label"><i data-lucide="music"></i> Voiceover Track & Audio SFX</span>
+              <span class="audio-timer" id="audio-timer">0.0s / 0.0s</span>
+            </div>
+            <!-- Canvas for visualizer -->
+            <canvas id="waveform-canvas" width="320" height="40"></canvas>
+          </div>
+
+          <!-- Export Area -->
+          <div class="export-actions">
+            <button class="btn btn-secondary btn-lg" id="btn-download-srt">
+              <i data-lucide="download"></i> Export SRT Captions
+            </button>
+            <button class="btn btn-primary btn-lg" id="btn-export-reel">
+              <i data-lucide="video"></i> Export Rendered Video (MP4)
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Export Modal Dialog -->
+    <dialog id="export-dialog" class="export-dialog-box">
+      <div class="dialog-content">
+        <div class="dialog-header">
+          <h3>Rendering Reel (1080x1920)</h3>
+          <button class="btn-close" id="btn-close-dialog"><i data-lucide="x"></i></button>
+        </div>
+        <div class="dialog-body">
+          <div class="render-progress-container">
+            <div class="spinner"></div>
+            <div class="render-progress-bar">
+              <div class="render-progress-fill" id="render-progress-fill"></div>
+            </div>
+            <span id="render-status-text">Starting rendering engine...</span>
+          </div>
+          <div class="render-cost-badge">
+            <i data-lucide="check-circle-2"></i> Cost estimate: $0.00 (Self-Hosted Pipeline)
+          </div>
+        </div>
+      </div>
+    </dialog>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
