@@ -301,6 +301,56 @@
       font-size: 0.85rem;
     }
 
+    /* COSTAR Grid */
+    .costar-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin: 1.2rem 0;
+    }
+
+    .costar-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1rem 0.75rem;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .costar-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .costar-card .letter {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.25rem;
+    }
+
+    .costar-card.c:hover { border-color: var(--primary); box-shadow: 0 0 15px var(--primary-glow); }
+    .costar-card.o:hover { border-color: var(--secondary); box-shadow: 0 0 15px var(--secondary-glow); }
+    .costar-card.s:hover { border-color: var(--success); box-shadow: 0 0 15px rgba(0, 255, 135, 0.3); }
+    .costar-card.t:hover { border-color: #ffbf00; box-shadow: 0 0 15px rgba(255, 191, 0, 0.3); }
+    .costar-card.a:hover { border-color: #ff007f; box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); }
+    .costar-card.r:hover { border-color: var(--primary); box-shadow: 0 0 15px var(--primary-glow); }
+
+    .costar-card .name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .costar-card .explanation {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
     /* Interactive Restaurant Map */
     .restaurant-grid {
       display: grid;
@@ -866,14 +916,48 @@
         <h2 class="slide-title">Prompt Engineering & The COSTAR Framework 📝</h2>
       </div>
       <div class="slide-content">
-        <p style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.95rem;">
-          A prompt is how we program an AI. The <strong>COSTAR</strong> framework ensures your prompts provide clear, structured instructions so the AI builds exactly what you need.
+        <p style="margin-bottom: 0.75rem; color: var(--text-muted); font-size: 0.95rem;">
+          A prompt is how we program an AI. The <strong>COSTAR</strong> framework ensures your prompts provide clear, structured instructions so the AI builds exactly what you need. Hover over each card below to see the details!
         </p>
+
+        <!-- COSTAR Abbreviations Grid -->
+        <div class="costar-grid">
+          <div class="costar-card c">
+            <div class="letter" style="color: var(--primary);">C</div>
+            <div class="name">Context</div>
+            <div class="explanation">Provide background info. Sets the AI's role or expert persona (e.g., "You are a senior developer").</div>
+          </div>
+          <div class="costar-card o">
+            <div class="letter" style="color: var(--secondary);">O</div>
+            <div class="name">Objective</div>
+            <div class="explanation">Define the exact task you want the AI to perform and its target output goals.</div>
+          </div>
+          <div class="costar-card s">
+            <div class="letter" style="color: var(--success);">S</div>
+            <div class="name">Style</div>
+            <div class="explanation">Specify the coding style, layout guides, UI patterns, or structural constraints.</div>
+          </div>
+          <div class="costar-card t">
+            <div class="letter" style="color: #ffbf00;">T</div>
+            <div class="name">Tone</div>
+            <div class="explanation">Establish the emotional tone or communication style (e.g., professional, enthusiastic).</div>
+          </div>
+          <div class="costar-card a">
+            <div class="letter" style="color: #ff007f;">A</div>
+            <div class="name">Audience</div>
+            <div class="explanation">Identify the target users or consumers of the output (e.g., coding students, general public).</div>
+          </div>
+          <div class="costar-card r">
+            <div class="letter" style="color: var(--primary);">R</div>
+            <div class="name">Response</div>
+            <div class="explanation">Define output structure and format guidelines (e.g., strict JSON schema, bullet lists).</div>
+          </div>
+        </div>
         
-        <div class="compare-container" style="grid-template-columns: 1fr 1.2fr; gap: 15px;">
-          <div class="compare-card primary-border" style="border-color: var(--error); background: rgba(255, 0, 127, 0.02);">
-            <h3 class="compare-title" style="color: var(--error);"><i data-lucide="x-circle"></i> Bad Example (Vague)</h3>
-            <p style="font-size: 0.85rem; font-style: italic; color: var(--text-muted); margin-bottom: 1rem; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 8px;">
+        <div class="compare-container" style="grid-template-columns: 1fr 1.2fr; gap: 15px; margin-top: 1rem;">
+          <div class="compare-card primary-border" style="border-color: var(--error); background: rgba(255, 0, 127, 0.02); padding: 1.2rem;">
+            <h3 class="compare-title" style="color: var(--error); font-size: 1.1rem; margin-bottom: 0.5rem;"><i data-lucide="x-circle"></i> Bad Example (Vague)</h3>
+            <p style="font-size: 0.85rem; font-style: italic; color: var(--text-muted); margin-bottom: 0.75rem; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 8px;">
               "Write a python script to crop videos and overlay subtitles."
             </p>
             <ul style="font-size: 0.8rem; display: flex; flex-direction: column; gap: 6px;">
@@ -883,9 +967,9 @@
               <li>❌ <strong>Prone to bugs:</strong> High chance of code hallucination.</li>
             </ul>
           </div>
-          <div class="compare-card secondary-border" style="border-color: var(--success); background: rgba(0, 255, 135, 0.02);">
-            <h3 class="compare-title" style="color: var(--success);"><i data-lucide="check-circle"></i> Good Example (COSTAR)</h3>
-            <p style="font-size: 0.8rem; font-style: italic; color: var(--text-muted); margin-bottom: 1rem; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 8px; line-height: 1.45;">
+          <div class="compare-card secondary-border" style="border-color: var(--success); background: rgba(0, 255, 135, 0.02); padding: 1.2rem;">
+            <h3 class="compare-title" style="color: var(--success); font-size: 1.1rem; margin-bottom: 0.5rem;"><i data-lucide="check-circle"></i> Good Example (COSTAR)</h3>
+            <p style="font-size: 0.8rem; font-style: italic; color: var(--text-muted); margin-bottom: 0.75rem; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 8px; line-height: 1.45;">
               "<strong>[C]</strong> You are a senior video developer. <strong>[O]</strong> Write a Python script using FFmpeg to crop 16:9 landscape videos into 9:16 portrait. <strong>[S]</strong> Use clean, async code. <strong>[T]</strong> Direct instructions. <strong>[A]</strong> Students learning AI. <strong>[R]</strong> Output code inside a JSON schema: <code>{'files': [{'name': str, 'code': str}]}</code>."
             </p>
             <ul style="font-size: 0.8rem; display: flex; flex-direction: column; gap: 6px;">
