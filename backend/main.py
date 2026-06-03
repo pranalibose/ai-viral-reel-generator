@@ -59,6 +59,26 @@ for path in [CACHE_DIR, OUTPUT_DIR, VOICEOVER_DIR, LOFI_TRACKS_DIR]:
 # We dynamically get the parent directory of OUTPUT_DIR (e.g., '/tmp/static' or './static') to support custom mount points
 STATIC_DIR = os.path.dirname(OUTPUT_DIR)
 os.makedirs(STATIC_DIR, exist_ok=True)
+
+# Sync pre-packaged assets (e.g., presentation slides or lofi tracks) to the runtime static folder
+import shutil
+repo_static_dir = "./backend/static" if os.path.exists("./backend/static") else "./static"
+repo_static_dir = os.path.abspath(repo_static_dir)
+runtime_static_dir = os.path.abspath(STATIC_DIR)
+
+if repo_static_dir != runtime_static_dir and os.path.exists(repo_static_dir):
+    logger.info(f"Syncing pre-packaged assets from {repo_static_dir} to runtime {runtime_static_dir}...")
+    for root, dirs, files in os.walk(repo_static_dir):
+        rel_path = os.path.relpath(root, repo_static_dir)
+        dest_dir = os.path.join(runtime_static_dir, rel_path)
+        os.makedirs(dest_dir, exist_ok=True)
+        for file in files:
+            src_file = os.path.join(root, file)
+            dest_file = os.path.join(dest_dir, file)
+            if not os.path.exists(dest_file):
+                logger.info(f"Copying {src_file} -> {dest_file}")
+                shutil.copy2(src_file, dest_file)
+
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 # Serve Frontend static assets directly from FastAPI
