@@ -103,6 +103,13 @@ def serve_frontend_app():
             return FileResponse(path, media_type="application/javascript")
     raise HTTPException(status_code=404, detail="app.js not found")
 
+@app.get("/slides")
+def serve_workshop_slides():
+    for path in ["slides.html", "../slides.html"]:
+        if os.path.exists(path):
+            return FileResponse(path)
+    raise HTTPException(status_code=404, detail="slides.html not found")
+
 # Request/Response models
 class StoryboardRequest(BaseModel):
     text: str
