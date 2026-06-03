@@ -22,9 +22,10 @@ ENV CACHE_DIR="/tmp/cache"
 ENV OUTPUT_DIR="/tmp/static/outputs"
 ENV VOICEOVER_DIR="/tmp/static/voiceovers"
 ENV LOFI_TRACKS_DIR="/tmp/static/lofi"
+ENV PYTHONPATH="/app/backend"
 
 # Expose port (FastAPI default, overridden by deployment platforms)
-EXPOSE 8000
+EXPOSE 7860
 
 # Run the FastAPI app. We run it by telling uvicorn to look inside the backend module
-CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "7860"]

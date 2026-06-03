@@ -241,3 +241,74 @@ Audio ducking is achieved programmatically by compressing the lofi loop dynamica
 
 #### Q: I receive CORS errors when submitting scripts from the dashboard.
 **A**: Ensure you are serving the frontend using a local server (like Python's `http.server` or Node's `serve`) instead of opening the HTML file directly as a local path (`file:///...`).
+
+---
+
+## ☁️ Cloud Deployment Guide (Hugging Face Spaces)
+
+Follow these steps to deploy this application to the cloud for free using Hugging Face Spaces:
+
+### 1. Create a Hugging Face Account
+If you don't have one, sign up for a free account at [Hugging Face](https://huggingface.co/).
+
+### 2. Create a New Space
+1. Navigate to [Hugging Face Spaces](https://huggingface.co/spaces) and click **Create new Space**.
+2. Fill out the following options:
+   * **Space name**: Enter a name (e.g., `ai-viral-reel-generator`).
+   * **License**: Select `apache-2.0` (or leave it blank).
+   * **SDK**: Select **Docker**.
+   * **Docker template**: Select **Blank** (do not select Gradio/Streamlit).
+   * **Space visibility**: Public or Private.
+3. Click **Create Space**.
+
+### 3. Set Up API Keys (Secrets)
+Hugging Face will run your app in a secure container. You must provide the API keys via the Space settings:
+1. Inside your newly created Space, click on the **Settings** tab (gear icon at the top right).
+2. Scroll down to **Variables and secrets**.
+3. Under the **Secrets** section, click **New secret** to add two variables:
+   * **Key**: `GEMINI_API_KEY` | **Value**: *[Your Google AI Studio Key]*
+   * **Key**: `PEXELS_API_KEY` | **Value**: *[Your Pexels Developer API Key]*
+
+### 4. Clone and Push Your Code
+You can push your files using Git. In your terminal:
+1. Clone the empty space repository to your local machine:
+   ```bash
+   git clone https://huggingface.co/spaces/YOUR_USERNAME/YOUR_SPACE_NAME
+   ```
+2. Copy all the files from this project into the cloned Space folder. Ensure that the root of your Space folder contains the following structure:
+   ```
+   ├── Dockerfile
+   ├── README.md
+   ├── index.html
+   ├── style.css
+   ├── app.js
+   └── backend/
+       ├── main.py
+       ├── requirements.txt
+       └── services/
+   ```
+3. Open the `README.md` file inside the cloned folder and verify it starts with this configuration block (this YAML frontmatter configures the Space card and must be present at the very top of `README.md`):
+   ```yaml
+   ---
+   title: AI Reel Generator
+   emoji: 🎬
+   colorFrom: purple
+   colorTo: indigo
+   sdk: docker
+   pinned: false
+   ---
+   ```
+4. Stage, commit, and push the files to Hugging Face:
+   ```bash
+   git add .
+   git commit -m "Deploy ViralReel.AI"
+   git push origin main
+   ```
+   *(Note: Hugging Face uses access tokens for git password authentication. Generate one at Hugging Face -> Settings -> Access Tokens).*
+
+### 5. Watch the Build and Run!
+Go to the **App** tab of your Hugging Face Space. The status will show **Building**. You can click **Logs** to watch the Docker container compile:
+1. It installs system dependencies (`ffmpeg`).
+2. It installs the Python environment dependencies (`fastapi`, `faster-whisper`, etc.).
+3. Once completed, the badge will turn to a green **Running** state, and the app will load right inside your Hugging Face Space page.
+

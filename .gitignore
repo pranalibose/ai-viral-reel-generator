@@ -25,3 +25,6 @@ backend/static/voiceovers/audio_*.wav
 # Node modules (if any frontend tooling is added in the future)
 node_modules/
 dist/
+
+# Cloned Hugging Face Space repository
+AI_Reel_Generator/

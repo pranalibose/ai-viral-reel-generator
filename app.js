@@ -1,6 +1,11 @@
 // Initialize Lucide Icons
 lucide.createIcons();
 
+// Determine API Base URL dynamically based on environment
+const API_BASE = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost"
+  ? (window.location.port === "8000" ? "" : "http://127.0.0.1:8000")
+  : "";
+
 // PRESETS & MOCK DATA
 const PRESETS = {
   hook: `The single biggest mistake content creators make is focusing on views instead of retention. If you don't hook them in the first three seconds, they are gone forever. Here is the framework I use to fix this: First, state a bold contradiction. Second, show proof. Third, outline the clear payoff. Apply this to your next 3 reels and watch your watch-time double. Comment 'VIRAL' below to get my free CapCut template bundle.`,
@@ -597,7 +602,7 @@ async function generateStoryboard() {
   appState.rawText = rawText;
 
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/generate-storyboard", {
+    const response = await fetch(`${API_BASE}/api/generate-storyboard`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -1160,7 +1165,7 @@ async function openExportDialog() {
   }, 300);
 
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/render", {
+    const response = await fetch(`${API_BASE}/api/render`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -1187,7 +1192,7 @@ async function openExportDialog() {
     dom.renderStatusText.innerHTML = `<span style="color: var(--success-color); font-weight:700;">Reel exported successfully!</span>`;
     
     if (result.videoUrl) {
-      const realVideoUrl = `http://127.0.0.1:8000${result.videoUrl}`;
+      const realVideoUrl = `${API_BASE}${result.videoUrl}`;
       console.log("Setting preview video to: ", realVideoUrl);
       dom.bgVideo.src = realVideoUrl;
       dom.bgVideo.load();

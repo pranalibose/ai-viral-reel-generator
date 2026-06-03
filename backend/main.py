@@ -5,6 +5,7 @@ from typing import List, Dict, Any, Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
@@ -55,7 +56,32 @@ for path in [CACHE_DIR, OUTPUT_DIR, VOICEOVER_DIR, LOFI_TRACKS_DIR]:
     os.makedirs(path, exist_ok=True)
 
 # Mount static outputs folder so videos are downloadable/playable from frontend
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# We dynamically get the parent directory of OUTPUT_DIR (e.g., '/tmp/static' or './static') to support custom mount points
+STATIC_DIR = os.path.dirname(OUTPUT_DIR)
+os.makedirs(STATIC_DIR, exist_ok=True)
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+# Serve Frontend static assets directly from FastAPI
+@app.get("/")
+def serve_frontend_root():
+    for path in ["index.html", "../index.html"]:
+        if os.path.exists(path):
+            return FileResponse(path)
+    return {"message": "ViralReel.AI API Server is running. Frontend index.html not found."}
+
+@app.get("/style.css")
+def serve_frontend_style():
+    for path in ["style.css", "../style.css"]:
+        if os.path.exists(path):
+            return FileResponse(path, media_type="text/css")
+    raise HTTPException(status_code=404, detail="style.css not found")
+
+@app.get("/app.js")
+def serve_frontend_app():
+    for path in ["app.js", "../app.js"]:
+        if os.path.exists(path):
+            return FileResponse(path, media_type="application/javascript")
+    raise HTTPException(status_code=404, detail="app.js not found")
 
 # Request/Response models
 class StoryboardRequest(BaseModel):
