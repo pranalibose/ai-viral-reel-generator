@@ -471,50 +471,59 @@
     .quiz-container {
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      margin-top: 1rem;
+      gap: 15px;
+      margin-top: 0.5rem;
     }
 
     .quiz-question {
-      font-size: 1.2rem;
-      font-weight: 600;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
     }
 
     .quiz-options {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
     }
 
     .quiz-option {
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--card-border);
       border-radius: 12px;
-      padding: 1.2rem;
+      padding: 1rem 1.5rem;
       cursor: pointer;
       font-weight: 500;
+      color: var(--text);
+      text-align: left;
+      font-size: 0.95rem;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
       gap: 12px;
+      width: 100%;
     }
 
     .quiz-option:hover {
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.08);
       border-color: rgba(255, 255, 255, 0.2);
+      transform: translateX(4px);
     }
 
     .quiz-option.correct {
-      background: rgba(0, 255, 135, 0.08);
-      border-color: var(--success);
-      color: var(--success);
+      background: rgba(0, 255, 135, 0.08) !important;
+      border-color: var(--success) !important;
+      color: var(--success) !important;
       box-shadow: 0 0 15px rgba(0, 255, 135, 0.15);
     }
 
     .quiz-option.incorrect {
-      background: rgba(255, 0, 127, 0.08);
-      border-color: var(--error);
-      color: var(--error);
+      background: rgba(255, 0, 127, 0.08) !important;
+      border-color: var(--error) !important;
+      color: var(--error) !important;
       box-shadow: 0 0 15px rgba(255, 0, 127, 0.15);
     }
 
@@ -524,6 +533,8 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      font-size: 0.9rem;
+      padding: 0 1rem;
     }
 
     /* Resources Links */
@@ -598,7 +609,7 @@
       <span class="logo-badge">Interactive Slides</span>
     </div>
     <div>
-      <span id="slide-number-display" style="font-weight: 700; color: var(--secondary);">Slide 1 of 6</span>
+      <span id="slide-number-display" style="font-weight: 700; color: var(--secondary);">Slide 1 of 7</span>
     </div>
   </header>
 
@@ -695,10 +706,49 @@
       </div>
     </section>
 
-    <!-- SLIDE 3: Master Prompt & COSTAR -->
+    <!-- SLIDE 3: Prompt Engineering & COSTAR Framework -->
     <section class="slide" id="slide-3">
       <div class="slide-header">
         <span class="slide-tag">Module 3</span>
+        <h2 class="slide-title">Prompt Engineering & The COSTAR Framework 📝</h2>
+      </div>
+      <div class="slide-content">
+        <p style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.95rem;">
+          A prompt is how we program an AI. The **COSTAR** framework ensures your prompts provide clear, structured instructions so the AI builds exactly what you need.
+        </p>
+        
+        <div class="compare-container" style="grid-template-columns: 1fr 1.2fr; gap: 15px;">
+          <div class="compare-card primary-border" style="border-color: var(--error); background: rgba(255, 0, 127, 0.02);">
+            <h3 class="compare-title" style="color: var(--error);"><i data-lucide="x-circle"></i> Bad Example (Vague)</h3>
+            <p style="font-size: 0.85rem; font-style: italic; color: var(--text-muted); margin-bottom: 1rem; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 8px;">
+              "Write a python script to crop videos and overlay subtitles."
+            </p>
+            <ul style="font-size: 0.8rem; display: flex; flex-direction: column; gap: 6px;">
+              <li>❌ **No Context [C]:** AI doesn't know who it is or why it's coding.</li>
+              <li>❌ **No Objective [O]:** Missing resolution parameters (9:16 vs 16:9).</li>
+              <li>❌ **No Response Format [R]:** Might write code, explanations, or print mock statements.</li>
+              <li>❌ **Prone to bugs:** High chance of code hallucination.</li>
+            </ul>
+          </div>
+          <div class="compare-card secondary-border" style="border-color: var(--success); background: rgba(0, 255, 135, 0.02);">
+            <h3 class="compare-title" style="color: var(--success);"><i data-lucide="check-circle"></i> Good Example (COSTAR)</h3>
+            <p style="font-size: 0.8rem; font-style: italic; color: var(--text-muted); margin-bottom: 1rem; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 8px; line-height: 1.45;">
+              "**[C]** You are a senior video developer. **[O]** Write a Python script using FFmpeg to crop 16:9 landscape videos into 9:16 portrait. **[S]** Use clean, async code. **[T]** Direct instructions. **[A]** Students learning AI. **[R]** Output code inside a JSON schema: `{'files': [{'name': str, 'code': str}]}`."
+            </p>
+            <ul style="font-size: 0.8rem; display: flex; flex-direction: column; gap: 6px;">
+              <li>✅ **Context [C]:** Establishes the agent's expert role ("senior video developer").</li>
+              <li>✅ **Objective [O] & Style [S]:** Specifies constraints (FFmpeg) and dimensions (16:9 to 9:16).</li>
+              <li>✅ **Response [R]:** Demands structured JSON so backends can parse it programmatically.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: Interactive Prompt Evaluator -->
+    <section class="slide" id="slide-4">
+      <div class="slide-header">
+        <span class="slide-tag">Module 3 (Practice)</span>
         <h2 class="slide-title">Interactive Prompt Evaluator (COSTAR) ✍️</h2>
       </div>
       <div class="slide-content">
@@ -733,8 +783,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 4: App Structure -->
-    <section class="slide" id="slide-4">
+    <!-- SLIDE 5: App Structure -->
+    <section class="slide" id="slide-5">
       <div class="slide-header">
         <span class="slide-tag">Module 4</span>
         <h2 class="slide-title">Anatomy of our Video App 📁</h2>
@@ -788,28 +838,17 @@
       </div>
     </section>
 
-    <!-- SLIDE 5: Interactive Quiz -->
-    <section class="slide" id="slide-5">
+    <!-- SLIDE 6: Interactive Quiz -->
+    <section class="slide" id="slide-6">
       <div class="slide-header">
         <span class="slide-tag">Module 5</span>
-        <h2 class="slide-title">Test Your Understanding! 🧠</h2>
+        <h2 class="slide-title">Interactive Quiz & Self-Assessment 🧠</h2>
       </div>
       <div class="slide-content">
         <div class="quiz-container">
-          <p id="quiz-question-title" class="quiz-question">Question 1: What is "Vibe Coding"?</p>
+          <p id="quiz-question-title" class="quiz-question" style="margin-bottom: 0.5rem;">Question 1: What is "Vibe Coding"?</p>
           <div class="quiz-options" id="quiz-options-box">
-            <button class="quiz-option" onclick="checkAnswer(0)">
-              <i data-lucide="circle"></i> Coding while listening to music
-            </button>
-            <button class="quiz-option" onclick="checkAnswer(1)">
-              <i data-lucide="circle"></i> Writing assembly code on CPU
-            </button>
-            <button class="quiz-option" onclick="checkAnswer(2)">
-              <i data-lucide="circle"></i> Directing AI agents to write code structure & debug
-            </button>
-            <button class="quiz-option" onclick="checkAnswer(3)">
-              <i data-lucide="circle"></i> Copying code templates off StackOverflow
-            </button>
+            <!-- Staged vertically -->
           </div>
           <div class="quiz-feedback" id="quiz-feedback-box">
             <!-- Feedback updates dynamically -->
@@ -821,8 +860,8 @@
       </div>
     </section>
 
-    <!-- SLIDE 6: Resources & Wrap Up -->
-    <section class="slide" id="slide-6">
+    <!-- SLIDE 7: Resources & Wrap Up -->
+    <section class="slide" id="slide-7">
       <div class="slide-header">
         <span class="slide-tag">Wrap Up</span>
         <h2 class="slide-title">Your Workshop Takeaways & Tools 🏆</h2>
@@ -873,6 +912,7 @@
         <div class="dot" onclick="goToSlide(4)"></div>
         <div class="dot" onclick="goToSlide(5)"></div>
         <div class="dot" onclick="goToSlide(6)"></div>
+        <div class="dot" onclick="goToSlide(7)"></div>
       </div>
       <button class="btn btn-primary" id="btn-next" onclick="changeSlide(1)">Next <i data-lucide="chevron-right"></i></button>
     </div>
@@ -882,7 +922,7 @@
   <script>
     // State Management
     let currentSlide = 1;
-    const totalSlides = 6;
+    const totalSlides = 7;
 
     function changeSlide(direction) {
       const newSlide = currentSlide + direction;
@@ -1054,40 +1094,105 @@
       {
         question: "Question 1: What is 'Vibe Coding'?",
         options: [
-          "Coding while listening to music",
-          "Writing assembly code on CPU",
-          "Directing AI agents to write code structures and debug",
-          "Copying code templates off StackOverflow"
+          "Coding while listening to high-energy music tracks",
+          "Writing code at assembly level to communicate with hardware",
+          "Directing AI agents using natural language to structure, write, and test applications",
+          "Copying templates off StackOverflow without understanding them"
         ],
         answer: 2,
-        feedback: "Correct! Vibe Coding means using natural language to orchestrate AI agents to write and debug code structure for you."
+        category: "vibe",
+        feedback: "Correct! Vibe Coding means using natural language to direct AI agents to execute code structures and test files for you."
       },
       {
         question: "Question 2: What is the primary role of an API in applications?",
         options: [
-          "To style the website layout using colors",
-          "To serve as a waiter transferring requests and data between systems",
-          "To scan the server for security threats",
-          "To speed up the computer's CPU performance"
+          "To style the background color of the HTML interface",
+          "To act as a waiter transferring requests and data between systems",
+          "To scan the local computer for virus files",
+          "To speed up the local hardware CPU clocks"
         ],
         answer: 1,
-        feedback: "Correct! Just like a waiter, an API takes data from one system, delivers it to another, and returns the response."
+        category: "api",
+        feedback: "Correct! An API functions like a waiter, taking requests from one system (frontend) and delivering them to another (backend/LLM)."
       },
       {
         question: "Question 3: Why do we use a Dockerfile to deploy this application?",
         options: [
-          "To package FFmpeg and python dependencies in a single running box",
-          "To make the website load faster in Google Chrome",
-          "To encrypt the codebase files",
-          "To edit the video files locally"
+          "To bundle FFmpeg, Python dependencies, and code inside a single runtime container",
+          "To compress the project files so they occupy less disk space",
+          "To encrypt the codebase so it is invisible to others",
+          "To edit code files directly in the browser"
         ],
         answer: 0,
-        feedback: "Correct! Docker acts as a container that bundles all system utilities (like FFmpeg) and libraries so the app runs identical in the cloud."
+        category: "docker",
+        feedback: "Correct! A Dockerfile packages all system packages (like FFmpeg) and libraries so the app runs identically in the cloud."
+      },
+      {
+        question: "Question 4: What is the primary benefit of forcing an LLM (like Gemini) to output JSON matching a strict schema?",
+        options: [
+          "It makes the generated text read more naturally for users",
+          "It forces the LLM to run faster in the backend",
+          "It ensures the backend server can reliably parse the data (text, keywords) without syntax errors",
+          "It encrypts the output so it can be safely stored on disk"
+        ],
+        answer: 2,
+        category: "prompt",
+        feedback: "Correct! Enforcing a JSON schema ensures that the backend can programmatically extract properties (like scenes and search queries) without formatting errors."
+      },
+      {
+        question: "Question 5: In FFmpeg, what does the sidechaincompress (ducking) filter accomplish in our script?",
+        options: [
+          "It speeds up the video rendering speed",
+          "It compresses the size of the final video file",
+          "It automatically lowers the background music loop volume whenever speech is active on the narration track",
+          "It increases the volume of the sound effects dynamically"
+        ],
+        answer: 2,
+        category: "ffmpeg",
+        feedback: "Correct! Sidechain compression dynamically compresses (ducks) the background music level based on speech signal triggers."
+      },
+      {
+        question: "Question 6: Why did the slides PDF download originally fail with a 404 in the container?",
+        options: [
+          "Because the PDF file was not compiled correctly",
+          "Because the PDF was in '/app/backend/static/' but the server mounted `/tmp/static/` (due to Hugging Face write restrictions)",
+          "Because Hugging Face does not support hosting PDF files",
+          "Because the frontend was pointing to the wrong port number"
+        ],
+        answer: 1,
+        category: "docker",
+        feedback: "Correct! Hugging Face restricts write permissions to `/tmp`. Because the static mount was pointing to `/tmp/static`, we had to sync the pre-packaged PDF to `/tmp/static` on startup."
+      },
+      {
+        question: "Question 7: Why did Hugging Face reject the raw PDF push, and how did we resolve it?",
+        options: [
+          "Hugging Face does not support Git pushes",
+          "PDFs are banned files on Hugging Face",
+          "Hugging Face rejects binary files pushed over standard Git; we resolved it by tracking PDFs with Git LFS",
+          "The file was too large; we resolved it by compressing the PDF"
+        ],
+        answer: 2,
+        category: "lfs",
+        feedback: "Correct! Hugging Face pre-receive hooks reject binary files over standard Git; we tracked it via Git LFS which uploads it to LFS storage."
+      },
+      {
+        question: "Question 8: What does setting the PYTHONPATH environment variable in the Dockerfile solve?",
+        options: [
+          "It installs the correct Python version inside the container",
+          "It adds the 'backend' folder to Python's system path, preventing ModuleNotFoundError for services imports",
+          "It speeds up the execution of the FastAPI router",
+          "It connects the backend to Google AI Studio"
+        ],
+        answer: 1,
+        category: "docker",
+        feedback: "Correct! PYTHONPATH tells Python where to look for modules, resolving backend subfolder imports when the working directory is set to root `/app`."
       }
     ];
 
     let currentQuestionIdx = 0;
     let answered = false;
+    let correctAnswersCount = 0;
+    let wrongCategories = [];
 
     function renderQuestion() {
       const q = quizQuestions[currentQuestionIdx];
@@ -1121,12 +1226,22 @@
         buttonElement.classList.add('correct');
         buttonElement.querySelector('i').setAttribute('data-lucide', 'check-circle-2');
         document.getElementById('quiz-feedback-box').innerHTML = `<span style="color: var(--success); display: inline-flex; align-items: center; gap: 8px;"><i data-lucide="check-circle"></i> ${q.feedback}</span>`;
+        correctAnswersCount++;
       } else {
         buttonElement.classList.add('incorrect');
         buttonElement.querySelector('i').setAttribute('data-lucide', 'x-circle');
         options[q.answer].classList.add('correct');
         options[q.answer].querySelector('i').setAttribute('data-lucide', 'check-circle-2');
-        document.getElementById('quiz-feedback-box').innerHTML = `<span style="color: var(--error); display: inline-flex; align-items: center; gap: 8px;"><i data-lucide="alert-circle"></i> Incorrect. The correct answer was option ${q.answer + 1}.</span>`;
+        document.getElementById('quiz-feedback-box').innerHTML = `<span style="color: var(--error); display: inline-flex; align-items: center; gap: 8px;"><i data-lucide="alert-circle"></i> Incorrect. ${q.feedback}</span>`;
+        
+        // Track categories to review
+        if (!wrongCategories.includes(q.category)) {
+          wrongCategories.push(q.category);
+        }
+      }
+      
+      if (currentQuestionIdx === quizQuestions.length - 1) {
+        document.getElementById('btn-next-question').innerHTML = `Show Results <i data-lucide="award"></i>`;
       }
       
       document.getElementById('btn-next-question').disabled = false;
@@ -1138,17 +1253,88 @@
       if (currentQuestionIdx < quizQuestions.length) {
         renderQuestion();
       } else {
-        // Quiz completed
-        document.getElementById('quiz-question-title').textContent = "Quiz Completed! 🎉";
-        document.getElementById('quiz-options-box').innerHTML = `
-          <div style="grid-column: 1 / span 2; text-align: center; padding: 2rem; border: 1px solid var(--card-border); border-radius: 16px; background: rgba(0, 255, 135, 0.03);">
-            <h3 style="color: var(--success); margin-bottom: 10px;">Excellent work!</h3>
-            <p style="color: var(--text-muted); font-size: 0.95rem;">You are now ready to teach Vibe Coding and guide your students to deploy their own AI Video Generators.</p>
-          </div>
-        `;
-        document.getElementById('quiz-feedback-box').innerHTML = '';
-        document.getElementById('btn-next-question').style.display = 'none';
+        showQuizResults();
       }
+    }
+
+    function showQuizResults() {
+      document.getElementById('quiz-question-title').textContent = "Quiz Completed! 🎉";
+      const optionsBox = document.getElementById('quiz-options-box');
+      
+      const scorePercent = Math.round((correctAnswersCount / quizQuestions.length) * 100);
+      
+      let badgeColor = "var(--error)";
+      let ratingMsg = "Keep learning! Let's review the core concepts.";
+      if (scorePercent >= 80) {
+        badgeColor = "var(--success)";
+        ratingMsg = "Amazing! You are a master of Vibe Coding & Deployment!";
+      } else if (scorePercent >= 50) {
+        badgeColor = "var(--secondary)";
+        ratingMsg = "Good effort! Let's touch up on a few technical areas.";
+      }
+      
+      // Compile recommendations
+      let recommendationsHtml = "";
+      if (wrongCategories.length === 0) {
+        recommendationsHtml = `
+          <li style="margin-bottom: 8px; color: var(--success); display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="check-circle-2"></i> **Perfect score!** You have mastered all topics. Go build and deploy more complex applications!
+          </li>
+        `;
+      } else {
+        wrongCategories.forEach(cat => {
+          if (cat === "vibe" || cat === "api") {
+            recommendationsHtml += `
+              <li style="margin-bottom: 10px; color: #f3f4f6; display: flex; flex-direction: column; gap: 3px; align-items: flex-start;">
+                <span style="color: var(--secondary); font-weight: 700; display: flex; align-items: center; gap: 6px;"><i data-lucide="book-open"></i> Core APIs & Vibe Coding</span>
+                <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 22px;">Review **Module 1 & 2** (Slide 1 & 2) to reinforce how API waitering works and the shift to natural language agent workflows.</span>
+              </li>
+            `;
+          } else if (cat === "prompt") {
+            recommendationsHtml += `
+              <li style="margin-bottom: 10px; color: #f3f4f6; display: flex; flex-direction: column; gap: 3px; align-items: flex-start;">
+                <span style="color: var(--primary); font-weight: 700; display: flex; align-items: center; gap: 6px;"><i data-lucide="pen-tool"></i> Prompt Engineering (COSTAR)</span>
+                <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 22px;">Review **Module 3** (Slide 3 & 4) to master the Context, Objective, and Response requirements for LLM schema outputs.</span>
+              </li>
+            `;
+          } else if (cat === "docker") {
+            recommendationsHtml += `
+              <li style="margin-bottom: 10px; color: #f3f4f6; display: flex; flex-direction: column; gap: 3px; align-items: flex-start;">
+                <span style="color: #ffaa00; font-weight: 700; display: flex; align-items: center; gap: 6px;"><i data-lucide="box"></i> Containerization & CWD Paths</span>
+                <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 22px;">Review the **Dockerfile** settings, `PYTHONPATH` exports, and the `main.py` dynamic directory resolver code.</span>
+              </li>
+            `;
+          } else if (cat === "ffmpeg" || cat === "lfs") {
+            recommendationsHtml += `
+              <li style="margin-bottom: 10px; color: #f3f4f6; display: flex; flex-direction: column; gap: 3px; align-items: flex-start;">
+                <span style="color: var(--error); font-weight: 700; display: flex; align-items: center; gap: 6px;"><i data-lucide="git-branch"></i> Video Pipelines & Git LFS</span>
+                <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 22px;">Review the Git LFS sections in the guides, and study sidechain compressor audio filters in `render_service.py`.</span>
+              </li>
+            `;
+          }
+        });
+      }
+
+      optionsBox.style.display = 'block';
+      optionsBox.innerHTML = `
+        <div style="text-align: center; padding: 2rem; border: 1px solid var(--card-border); border-radius: 20px; background: rgba(255, 255, 255, 0.01); width: 100%;">
+          <div style="margin-bottom: 1.5rem;">
+            <span style="font-size: 1rem; color: var(--text-muted); display: block; margin-bottom: 5px;">Your Final Score</span>
+            <span style="font-size: 3.2rem; font-weight: 800; color: ${badgeColor}; text-shadow: 0 0 20px ${badgeColor}40;">${correctAnswersCount} / ${quizQuestions.length}</span>
+            <span style="font-size: 1.2rem; display: block; font-weight: 700; margin-top: 10px; color: #fff;">${scorePercent}% - ${ratingMsg}</span>
+          </div>
+          
+          <div style="text-align: left; border-top: 1px solid var(--card-border); padding-top: 1.5rem; max-width: 650px; margin: 0 auto; width: 100%;">
+            <h4 style="margin-bottom: 1rem; font-size: 1rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;"><i data-lucide="award"></i> Recommended Study Focus:</h4>
+            <ul style="list-style-type: none; display: flex; flex-direction: column; gap: 12px;">
+              ${recommendationsHtml}
+            </ul>
+          </div>
+        </div>
+      `;
+      document.getElementById('quiz-feedback-box').innerHTML = '';
+      document.getElementById('btn-next-question').style.display = 'none';
+      lucide.createIcons();
     }
 
     // Initialize Page
