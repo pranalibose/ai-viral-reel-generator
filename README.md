@@ -1,5 +1,7 @@
 # 🎬 ViralReel.AI — 100% Free-Tier AI Reel Generator
 
+🚀 **Live Space Demo**: [AI_Reel_Generator on Hugging Face Spaces](https://huggingface.co/spaces/pranalibose/AI_Reel_Generator)
+
 ViralReel.AI is a premium, open-source dashboard designed to generate engaging, 9:16 portrait videos (TikToks, YouTube Shorts, Instagram Reels) from raw script or topic texts. 
 
 The core architecture is built around a **$0.00 operational cost model**, strictly leveraging free-tier APIs, local voice synthesis, local audio-word alignment models, and free stock asset scrapers.
